@@ -1,18 +1,19 @@
 const express = require('express');
-const api = express();
+const app = express();
+const indexRoutes=require('./application/routes/index.route');
+const userRoutes=require('./application/routes/user.route');
 
-const routes = require('../src/application/routes');
-const config = require('../config');
-const morgan = require('morgan');
+// Settings
+app.set('port', process.env.PORT || 3000);
 
-const middlewares = new(require('../src/application/middlewares'));
+// Middlewares
+app.use(express.json());
 
-api.use(morgan(config.logging));
-api.use(express.json());
-api.use(config.endpoint, routes);
-api.use(middlewares.notFound);
-api.use(middlewares.serverError);
+// Routes
+app.use('/', indexRoutes);
+app.use('/users', userRoutes);
 
-api.listen(config.port, () => {
-	console.info(`Server running on PORT ${config.port} (${config.env})`);
+// starting the server
+app.listen(app.get('port'), () => {
+    console.log(`server on port ${app.get('port')}`);
 });

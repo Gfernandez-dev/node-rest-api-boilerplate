@@ -4,7 +4,7 @@ info:
   title: "node-rest-api-boilerplate"
   description: "API REST created with Node.js and Express."
 host: localhost
-basePath: "/api"
+basePath: "/"
 schemes:
   - https
   - http
@@ -13,11 +13,11 @@ consumes:
 produces:
   - application/json
 paths:
-  /hello-world:
+  /users:
     get:
       tags:
         - Example
-      summary: "Endpoint used how to example"
+      summary: "Endpoint to get active users"
       description: Update this spec with the correct information required.
       responses:
         200:
@@ -26,8 +26,8 @@ responses:
   success:
     description: OK
     schema:
-      $ref: '#/definitions/Greeting'
+      $ref: '#/definitions/User'
 definitions:
-  Greeting:
-    type: string
-    example: "Hello World"
+  User:
+    type: object
+    
